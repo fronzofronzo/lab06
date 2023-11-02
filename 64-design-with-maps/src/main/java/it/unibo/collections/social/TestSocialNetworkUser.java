@@ -21,6 +21,10 @@ import java.util.Collection;
 public final class TestSocialNetworkUser {
 
     private static final String WRITERS = "writers";
+    private static final int KB_AGE = 56;
+    private static final int DW_AGE = 59;
+    private static final int MG_AGE = 51;
+    private static final int NT_AGE = 54;
 
     private TestSocialNetworkUser() {
     }
@@ -48,11 +52,11 @@ public final class TestSocialNetworkUser {
          * 
          * * Adam Smith, asmith, (no age)
          */
-        final SocialNetworkUser<User> kbacon = null; //TODO
-        final SocialNetworkUser<User> dwashington = null; //TODO
-        final SocialNetworkUser<User> mgladwell = null; //TODO
-        final SocialNetworkUser<User> ntaleb = null; //TODO
-        final User asmith = null; //TODO
+        final SocialNetworkUser<User> kbacon = new SocialNetworkUserImpl<>("Kevin", "Bacon", "kbacon", KB_AGE);
+        final SocialNetworkUser<User> dwashington = new SocialNetworkUserImpl<>("Denzel", "Washington", "dwashington", DW_AGE); 
+        final SocialNetworkUser<User> mgladwell =  new SocialNetworkUserImpl<>("Malcom", "Gladwell", "mgladwell", MG_AGE);
+        final SocialNetworkUser<User> ntaleb =  new SocialNetworkUserImpl<>("Nicholas", "Taleb", "ntaleb", NT_AGE);
+        final User asmith = new UserImpl("Adam", "Smith", "asmith");
         /*
          * Make people follow each other
          */
