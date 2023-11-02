@@ -36,7 +36,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      * In order to save the people followed by a user organized in groups, adopt
      * a generic-type Map:  think of what type of keys and values would best suit the requirements
      */
-
+    Map<String, Set<U>> followedMap = new HashMap<>();
     /*
      * [CONSTRUCTORS]
      *
@@ -48,6 +48,9 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      * - username
      * - age and every other necessary field
      */
+    public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
+        super(name,surname,user,userAge);
+    }
     /**
      * Builds a user participating in a social network.
      *
