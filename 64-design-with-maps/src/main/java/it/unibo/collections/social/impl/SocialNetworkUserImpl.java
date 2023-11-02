@@ -48,9 +48,6 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      * - username
      * - age and every other necessary field
      */
-    public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-        super(name,surname,user,userAge);
-    }
     /**
      * Builds a user participating in a social network.
      *
@@ -65,13 +62,15 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      *            application
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-        super(null, null, null, 0);
+        super(name, surname, user, userAge);
     }
 
     /*
      * 2) Define a further constructor where the age defaults to -1
      */
-
+    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
+        super(name, surname, user, -1);
+    }
     /*
      * [METHODS]
      *
@@ -79,7 +78,10 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+        if(!this.followedMap.containsKey(circle)) {
+            this.followedMap.put(circle, new HashSet<>());
+        }
+        return this.followedMap.get(circle).add(user); 
     }
 
     /**
