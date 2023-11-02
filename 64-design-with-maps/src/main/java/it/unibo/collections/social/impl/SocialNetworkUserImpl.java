@@ -37,7 +37,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      * In order to save the people followed by a user organized in groups, adopt
      * a generic-type Map:  think of what type of keys and values would best suit the requirements
      */
-    final Map<String, Collection<U>> followedMap = new HashMap<>();
+    final Map<String, Set<U>> followedMap;
     /*
      * [CONSTRUCTORS]
      *
@@ -64,13 +64,14 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
+        this.followedMap = new HashMap<>();
     }
 
     /*
      * 2) Define a further constructor where the age defaults to -1
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user) {
-        super(name, surname, user, -1);
+        this(name, surname, user, -1);
     }
     /*
      * [METHODS]
@@ -92,7 +93,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-         Collection<U> followedUsers; 
+        Collection<U> followedUsers; 
         if(this.followedMap.containsKey(groupName)) {
             followedUsers = new HashSet<>(followedMap.get(groupName));
         } else {
@@ -103,8 +104,8 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
 
     @Override
     public List<U> getFollowedUsers() {
-        List<U> followedUsers = new LinkedList<>();
-        for(Collection<U> s : this.followedMap.values()) {
+         List<U> followedUsers = new LinkedList<>();
+        for(/*final*/ Collection<U> s : this.followedMap.values()) {
             followedUsers.addAll(s);
         }
         return followedUsers;
